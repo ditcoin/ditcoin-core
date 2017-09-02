@@ -98,16 +98,16 @@ t_command_server::t_command_server(
     , std::bind(&t_command_parser_executor::is_key_image_spent, &m_parser, p::_1)
     , "Prints whether a given key image is in the spent key images set, is_key_image_spent <key_image>"
     );
-  // m_command_lookup.set_handler(
-  //     "start_mining"
-  //   , std::bind(&t_command_parser_executor::start_mining, &m_parser, p::_1)
-  //   , "Start mining for specified address,  <addr> [<threads>] [do_background_mining] [ignore_battery], default 1 thread, no background mining"
-  //   );
-  // m_command_lookup.set_handler(
-  //     "stop_mining"
-  //   , std::bind(&t_command_parser_executor::stop_mining, &m_parser, p::_1)
-  //   , "Stop mining"
-  //   );
+  m_command_lookup.set_handler(
+      "start_mining"
+    , std::bind(&t_command_parser_executor::start_mining, &m_parser, p::_1)
+    , "Start mining for specified address,  <addr> [<threads>] [do_background_mining] [ignore_battery], default 1 thread, no background mining"
+    );
+  m_command_lookup.set_handler(
+      "stop_mining"
+    , std::bind(&t_command_parser_executor::stop_mining, &m_parser, p::_1)
+    , "Stop mining"
+    );
   m_command_lookup.set_handler(
       "print_pool"
     , std::bind(&t_command_parser_executor::print_transaction_pool_long, &m_parser, p::_1)
