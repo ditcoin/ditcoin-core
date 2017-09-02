@@ -406,11 +406,13 @@ namespace nodetool
     {
       full_addrs.insert("192.64.114.132:29090");
       full_addrs.insert("198.54.113.250:29090");
+      full_addrs.insert("148.163.92.71:29090");
     }
     else
     {
       full_addrs.insert("192.64.114.132:19090");
       full_addrs.insert("198.54.113.250:19090");
+      full_addrs.insert("148.163.92.71:19090");
     }
 
     return full_addrs;
