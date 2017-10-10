@@ -89,19 +89,19 @@ static const struct {
   // version 1 from the start of the blockchain
   { 1, 1, 0, 1497916800 },
 
-  // version 2 starts from block 1009827, which is on or around the 20th of March, 2016. Fork time finalised on 2015-09-20. No fork voting occurs for the v2 fork.
-  // { 2, 1009827, 0, 1442763710 },
+  // version 2 starts from block 259200, which is on or around the 10th of April, 2018. Fork time finalised on 2018-04-11. No fork voting occurs for the v2 fork.
+  { 2, 259200, 0, 1520666969 },
 
-  // version 3 starts from block 1141317, which is on or around the 24th of September, 2016. Fork time finalised on 2016-03-21.
-  // { 3, 1141317, 0, 1458558528 },
+  // version 3 starts from block 432000, which is on or around the 10th of jully, 2018. Fork time finalised on 2018-07-11.
+  { 3, 432000, 0, 1531207769 },
   
-  // version 4 starts from block 1220516, which is on or around the 5th of January, 2017. Fork time finalised on 2016-09-18.
-  // { 4, 1220516, 0, 1483574400 },
+  // version 4 starts from block 604800, which is on or around the 10th of october, 2018. Fork time finalised on 2018-10-11.
+  { 4, 604800, 0, 1539156569 },
   
-  // version 5 starts from block 1406997, which is on or around the 20th of june, 2017. Fork time finalised on 2018-05-20.
-  { 5, 1406997, 0, 1529452800 },  
+  // version 5 starts from block 777600, which is on or around the 10th of june, 2019. Fork time finalised on 2019-01-11.
+  { 5, 777600, 0, 1547105369 }
 };
-static const uint64_t mainnet_hard_fork_version_1_till = 1406996;
+static const uint64_t mainnet_hard_fork_version_1_till = 259199;
 
 static const struct {
   uint8_t version;
@@ -109,16 +109,16 @@ static const struct {
   uint8_t threshold;
   time_t time;
 } testnet_hard_forks[] = {
-  // version 1 from the start of the blockchain
-  { 1, 1, 0, 1497916800 },
+    // version 1 from the start of the blockchain
+    {1, 1, 0, 1497916800},
 
-  // version 2 starts from block 624634, which is on or around the 23rd of November, 2015. Fork time finalised on 2015-11-20. No fork voting occurs for the v2 fork.
-  // { 2, 624634, 0, 1445355000 },
+    // version 2 starts from block 624634, which is on or around the 23rd of November, 2015. Fork time finalised on 2015-11-20. No fork voting occurs for the v2 fork.
+    // { 2, 624634, 0, 1445355000 },
 
-  // versions 3-5 were passed in rapid succession from September 18th, 2016
-  // { 3, 800500, 0, 1472415034 },
-  // { 4, 801219, 0, 1472415035 },
-  { 5, 802660, 0, 1511222400 + 86400*180 }, // add 5 months on testnet to shut the update warning up since there's a large gap to v6
+    // versions 3-5 were passed in rapid succession from September 18th, 2016
+    // { 3, 800500, 0, 1472415034 },
+    // { 4, 801219, 0, 1472415035 },
+    {5, 604800, 0, 1539156569}
 };
 static const uint64_t testnet_hard_fork_version_1_till = 802659;
 
