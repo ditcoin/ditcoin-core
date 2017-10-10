@@ -47,7 +47,7 @@ The Bitcoin donation address is: `1DDquqzHZEM2PF7Qyftr9hvxk2NJaiozxx`
 
 The Monero donation address is: `42iXGr9Ms1FKxt1t8qLJdHRHVKvYMbgSxeRHNsNktjcpRypkEkPqjFT9Bses26xeZbPx5Qi7t5MPeKkzvvz4hYgdF8riCd5`
 
-*Note: you can easily donate DIT to the Ditcoin donation address by using the `donate` command. Type `help` in the command-line wallet for details.*
+*Note: you can easily donate DTC to the Ditcoin donation address by using the `donate` command. Type `help` in the command-line wallet for details.*
 
 ## License
 

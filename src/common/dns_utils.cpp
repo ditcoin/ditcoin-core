@@ -339,9 +339,9 @@ const char *tr(const char *str) { return i18n_translate(str, "tools::dns_utils")
 // TODO: parse the string in a less stupid way, probably with regex
 std::string address_from_txt_record(const std::string& s)
 {
-  // @TODO:#CHARNACOIN make sure of good behavior about changed xmr to dit
-  // make sure the txt record has "oa1:dit" and find it
-  auto pos = s.find("oa1:dit");
+  // @TODO:#CHARNACOIN make sure of good behavior about changed xmr to dtc
+  // make sure the txt record has "oa1:dtc" and find it
+  auto pos = s.find("oa1:dtc");
   if (pos == std::string::npos)
     return {};
   // search from there to find "recipient_address="
@@ -370,7 +370,7 @@ std::string address_from_txt_record(const std::string& s)
  *
  * gets the ditcoin address from the TXT record of the DNS entry associated
  * with <url>.  If this lookup fails, or the TXT record does not contain an
- * DIT address in the correct format, returns an empty string.  <dnssec_valid>
+ * DTC address in the correct format, returns an empty string.  <dnssec_valid>
  * will be set true or false according to whether or not the DNS query passes
  * DNSSEC validation.
  *
