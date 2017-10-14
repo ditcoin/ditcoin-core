@@ -50,9 +50,9 @@
 #define BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW               60
 
 // MONEY_SUPPLY - total number coins to be generated
-#define MONEY_SUPPLY                                    ((uint64_t)3700000000000000)
+#define MONEY_SUPPLY                                    ((uint64_t)900000000000000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (12)
-#define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)200000000) // 2 * pow(10, 8)
+#define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)1500000000) // 15 * pow(10, 8)
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
 #define CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V2    60000 //size of block (bytes) after which reward for block calculated using block size
@@ -74,7 +74,7 @@
 
 #define DIFFICULTY_TARGET_V2                            120  // seconds
 #define DIFFICULTY_TARGET_V1                            60  // seconds - before first fork
-#define DIFFICULTY_WINDOW                               24 * 60 * 60 / DIFFICULTY_TARGET_V1 // blocks
+#define DIFFICULTY_WINDOW                               24 * 60 * 60 / DIFFICULTY_TARGET_V2 // blocks
 #define DIFFICULTY_LAG                                  15  // !!!
 #define DIFFICULTY_CUT                                  60  // timestamps to cut after sorting
 #define DIFFICULTY_BLOCKS_COUNT                         DIFFICULTY_WINDOW + DIFFICULTY_LAG
@@ -85,7 +85,7 @@
 #define CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_BLOCKS       1
 
 
-#define DIFFICULTY_BLOCKS_ESTIMATE_TIMESPAN             DIFFICULTY_TARGET_V1 //just alias; used by tests
+#define DIFFICULTY_BLOCKS_ESTIMATE_TIMESPAN             DIFFICULTY_TARGET_V2 //just alias; used by tests
 
 
 #define BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT          10000  //by default, blocks ids count in synchronizing
@@ -151,7 +151,7 @@ namespace config
   boost::uuids::uuid const NETWORK_ID = { {
       0x12, 0x32, 0xF2, 0x72 , 0x62, 0x02 , 0x42, 0x62, 0x12, 0x32, 0x02, 0x82, 0x12, 0xA2, 0xA2, 0x12
     } };
-  std::string const GENESIS_TX = "013c01ff0001b4b5d890a51a029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071210163e8d7d7bd1f365b10eef6b1ef713b37cd7785f769ed92b19480bc75ca59bed1";
+  std::string const GENESIS_TX = "013c01ff0001c489e5c5b206029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071210163e8d7d7bd1f365b10eef6b1ef713b37cd7785f769ed92b19480bc75ca59bed1";
   uint32_t const GENESIS_NONCE = 10000;
 
   namespace testnet
@@ -163,7 +163,7 @@ namespace config
     boost::uuids::uuid const NETWORK_ID = { {
         0x11 ,0x31, 0xF1, 0x71 , 0x61, 0x01 , 0x41, 0x61, 0x11, 0x31, 0x01, 0x81, 0x11, 0xA1, 0xA1, 0x11
       } };
-    std::string const GENESIS_TX = "013c01ff0001b4b5d890a51a029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101d48ffd34538737261eb4bc4a03b244e7519ce2b2f5c0a3cee9a31ccf6f558b2b";
+    std::string const GENESIS_TX = "013c01ff0001c489e5c5b206029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101d48ffd34538737261eb4bc4a03b244e7519ce2b2f5c0a3cee9a31ccf6f558b2b";
     uint32_t const GENESIS_NONCE = 10001;
   }
 }
