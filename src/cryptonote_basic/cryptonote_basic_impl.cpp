@@ -97,6 +97,11 @@ namespace cryptonote {
     {
       base_reward = FINAL_SUBSIDY_PER_MINUTE*target_minutes;
     }
+    // No infinite emission
+    if (already_generated_coins >= MAX_MONEY_EMISSION + MONEY_SUPPLY)
+    {
+      base_reward = ((uint64_t)0);
+    }
 
     uint64_t full_reward_zone = get_min_block_size(version);
 
