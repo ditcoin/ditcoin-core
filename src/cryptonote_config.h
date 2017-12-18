@@ -37,7 +37,7 @@
 
 #define CRYPTONOTE_MAX_BLOCK_NUMBER                     500000000
 #define CRYPTONOTE_MAX_BLOCK_SIZE                       500000000  // block header blob limit, never used!
-#define CRYPTONOTE_GETBLOCKTEMPLATE_MAX_BLOCK_SIZE	196608 //size of block (bytes) that is the maximum that miners will produce
+#define CRYPTONOTE_GETBLOCKTEMPLATE_MAX_BLOCK_SIZE	    196608 //size of block (bytes) that is the maximum that miners will produce
 #define CRYPTONOTE_MAX_TX_SIZE                          1000000000
 #define CRYPTONOTE_PUBLIC_ADDRESS_TEXTBLOB_VER          0
 #define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            60
@@ -51,6 +51,7 @@
 
 // MONEY_SUPPLY - total number coins to be generated
 #define MONEY_SUPPLY                                    ((uint64_t)900000000000000)
+#define MAX_MONEY_EMISSION                              ((uint64_t)2800000000000000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (12)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)1500000000) // 15 * pow(10, 8)
 
