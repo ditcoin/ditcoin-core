@@ -87,7 +87,7 @@ namespace nodetool
     {
 
     }
-    virtual void for_each_connection(std::function<bool(t_connection_context&,peerid_type)> f)
+    virtual void for_each_connection(std::function<bool(t_connection_context&,peerid_type,uint32_t)> f)
     {
 
     }

@@ -186,6 +186,7 @@ namespace nodetool
     m_config.m_net_config.connection_timeout = P2P_DEFAULT_CONNECTION_TIMEOUT;
     m_config.m_net_config.ping_connection_timeout = P2P_DEFAULT_PING_CONNECTION_TIMEOUT;
     m_config.m_net_config.send_peerlist_sz = P2P_DEFAULT_PEERS_IN_HANDSHAKE;
+    m_config.m_support_flags = P2P_SUPPORT_FLAGS;
 
     m_first_connection_maker_call = true;
     CATCH_ENTRY_L0("node_server::init_config", false);
@@ -193,10 +194,10 @@ namespace nodetool
   }
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
-  void node_server<t_payload_net_handler>::for_each_connection(std::function<bool(typename t_payload_net_handler::connection_context&, peerid_type)> f)
+  void node_server<t_payload_net_handler>::for_each_connection(std::function<bool(typename t_payload_net_handler::connection_context&, peerid_type, uint32_t)> f)
   {
     m_net_server.get_config_object().foreach_connection([&](p2p_connection_context& cntx){
-      return f(cntx, cntx.peer_id);
+      return f(cntx, cntx.peer_id, cntx.support_flags);
     });
   }
   //-----------------------------------------------------------------------------------
@@ -805,6 +806,13 @@ namespace nodetool
     {
       LOG_WARNING_CC(context_, "COMMAND_HANDSHAKE Failed");
       m_net_server.get_config_object().close(context_.m_connection_id);
+    }
+    else
+    {
+      try_get_support_flags(context_, [](p2p_connection_context& flags_context, const uint32_t& support_flags) 
+      {
+        flags_context.support_flags = support_flags;
+      });
     }
 
     return hsh_result;
@@ -1470,6 +1478,13 @@ namespace nodetool
 #endif
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
+  int node_server<t_payload_net_handler>::handle_get_support_flags(int command, COMMAND_REQUEST_SUPPORT_FLAGS::request& arg, COMMAND_REQUEST_SUPPORT_FLAGS::response& rsp, p2p_connection_context& context)
+  {
+    rsp.support_flags = m_config.m_support_flags;
+    return 1;
+  }
+  //-----------------------------------------------------------------------------------
+  template<class t_payload_net_handler>
   void node_server<t_payload_net_handler>::request_callback(const epee::net_utils::connection_context_base& context)
   {
     m_net_server.get_config_object().request_callback(context.m_connection_id);
@@ -1706,6 +1721,11 @@ namespace nodetool
         LOG_DEBUG_CC(context, "PING SUCCESS " << context.m_remote_address.host_str() << ":" << port_l);
       });
     }
+
+    try_get_support_flags(context, [](p2p_connection_context& flags_context, const uint32_t& support_flags) 
+    {
+      flags_context.support_flags = support_flags;
+    });
 
     //fill response
     m_peerlist.get_peerlist_head(rsp.local_peerlist_new);

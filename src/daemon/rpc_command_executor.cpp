@@ -470,6 +470,7 @@ bool t_rpc_command_executor::print_connections() {
 
   tools::msg_writer() << std::setw(30) << std::left << "Remote Host"
       << std::setw(20) << "Peer id"
+      << std::setw(20) << "Support Flags"      
       << std::setw(30) << "Recv/Sent (inactive,sec)"
       << std::setw(25) << "State"
       << std::setw(20) << "Livetime(sec)"

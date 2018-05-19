@@ -35,7 +35,7 @@
 // (may contain code and/or modifications by other developers)
 // developer rfree: this code is caller of our new network code, and is modded; e.g. for rate limiting
 
-// @TODO:#DITCOIN reviews "Support Flags" [56b799ad8]
+// @TODO:#ULTRAPOINT reviews "Support Flags" [56b799ad8]
 
 #include <boost/interprocess/detail/atomic.hpp>
 #include <list>
@@ -136,6 +136,7 @@ namespace cryptonote
 
     ss << std::setw(30) << std::left << "Remote Host"
       << std::setw(20) << "Peer id"
+      << std::setw(20) << "Support Flags"      
       << std::setw(30) << "Recv/Sent (inactive,sec)"
       << std::setw(25) << "State"
       << std::setw(20) << "Livetime(sec)"
@@ -152,6 +153,7 @@ namespace cryptonote
       ss << std::setw(30) << std::left << std::string(cntxt.m_is_income ? " [INC]":"[OUT]") +
         cntxt.m_remote_address.str()
         << std::setw(20) << std::hex << peer_id
+        << std::setw(20) << std::hex << support_flags
         << std::setw(30) << std::to_string(cntxt.m_recv_cnt)+ "(" + std::to_string(time(NULL) - cntxt.m_last_recv) + ")" + "/" + std::to_string(cntxt.m_send_cnt) + "(" + std::to_string(time(NULL) - cntxt.m_last_send) + ")"
         << std::setw(25) << get_protocol_state_string(cntxt.m_state)
         << std::setw(20) << std::to_string(time(NULL) - cntxt.m_started)
@@ -191,7 +193,7 @@ namespace cryptonote
   {
     std::list<connection_info> connections;
 
-    m_p2p->for_each_connection([&](const connection_context& cntxt, nodetool::peerid_type peer_id)
+    m_p2p->for_each_connection([&](const connection_context& cntxt, nodetool::peerid_type peer_id, uint32_t support_flags)
     {
       connection_info cnx;
       auto timestamp = time(NULL);
@@ -212,6 +214,8 @@ namespace cryptonote
       peer_id_str << std::hex << std::setw(16) << peer_id;
       peer_id_str >> cnx.peer_id;
       
+      cnx.support_flags = support_flags;
+
       cnx.recv_count = cntxt.m_recv_cnt;
       cnx.recv_idle_time = timestamp - std::max(cntxt.m_started, cntxt.m_last_recv);
 
@@ -380,6 +384,13 @@ namespace cryptonote
       ++arg.hop;
       //TODO: Add here announce protocol usage
       relay_block(arg, context);
+    }else if(bvc.m_marked_as_orphaned)
+    {
+      context.m_state = cryptonote_connection_context::state_synchronizing;
+      NOTIFY_REQUEST_CHAIN::request r = boost::value_initialized<NOTIFY_REQUEST_CHAIN::request>();
+      m_core.get_short_chain_history(r.block_ids);
+      LOG_PRINT_CCONTEXT_L2("-->>NOTIFY_REQUEST_CHAIN: m_block_ids.size()=" << r.block_ids.size() );
+      post_notify<NOTIFY_REQUEST_CHAIN>(r, context);
     }
 
     return 1;
@@ -856,7 +867,7 @@ namespace cryptonote
       auto time_from_epoh = point.time_since_epoch();
       auto sec = duration_cast< seconds >( time_from_epoh ).count();*/
 
-    //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-ditcoin/net/req-all.data", sec, get_avg_block_size());
+    //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
 
     if(context.m_last_response_height > arg.current_blockchain_height)
     {
@@ -1461,7 +1472,7 @@ skip:
         context.m_last_request_time = boost::posix_time::microsec_clock::universal_time();
         LOG_PRINT_CCONTEXT_L1("-->>NOTIFY_REQUEST_GET_OBJECTS: blocks.size()=" << req.blocks.size() << ", txs.size()=" << req.txs.size()
             << "requested blocks count=" << count << " / " << count_limit << " from " << span.first << ", first hash " << req.blocks.front());
-        //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-ditcoin/net/req-all.data", sec, get_avg_block_size());
+        //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
 
         post_notify<NOTIFY_REQUEST_GET_OBJECTS>(req, context);
         return true;
@@ -1487,7 +1498,7 @@ skip:
 
       //std::string blob; // for calculate size of request
       //epee::serialization::store_t_to_binary(r, blob);
-      //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-ditcoin/net/req-all.data", sec, get_avg_block_size());
+      //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
       //LOG_PRINT_CCONTEXT_L1("r = " << 200);
 
       context.m_last_request_time = boost::posix_time::microsec_clock::universal_time();
@@ -1528,7 +1539,7 @@ skip:
     if(m_synchronized.compare_exchange_strong(val_expected, true))
     {
       MGINFO_YELLOW(ENDL << "**********************************************************************" << ENDL
-        << "You are now synchronized with the network. You may now start ditcoin-wallet-cli." << ENDL
+        << "You are now synchronized with the network. You may now start monero-wallet-cli." << ENDL
         << ENDL
         << "Use the \"help\" command to see the list of available commands." << ENDL
         << "**********************************************************************");
