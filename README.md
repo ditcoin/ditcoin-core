@@ -81,10 +81,10 @@ Dates are provided in the format YYYY-MM-DD.
         docker build -t ditcoin .
      
         # either run in foreground
-        docker run -it -v /ditcoin/chain:/root/.ditcoin -v /ditcoin/wallet:/wallet -p 18080:18080 ditcoin
+        docker run -it -v /ditcoin/chain:/root/.ditcoin -v /ditcoin/wallet:/wallet -p 19095:19095 ditcoin
 
         # or in background
-        docker run -it -d -v /ditcoin/chain:/root/.ditcoin -v /ditcoin/wallet:/wallet -p 18080:18080 ditcoin
+        docker run -it -d -v /ditcoin/chain:/root/.ditcoin -v /ditcoin/wallet:/wallet -p 19095:19095 ditcoin
 
 Packaging for your favorite distribution would be a welcome contribution!
 
@@ -343,7 +343,7 @@ or:
 
 TAILS ships with a very restrictive set of firewall rules. Therefore, you need to add a rule to allow this connection too, in addition to telling torsocks to allow inbound connections. Full example:
 
-`sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT`
+`sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 19096 -j ACCEPT`
 
 `DNS_PUBLIC=tcp torsocks ./ditcoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain`
 
