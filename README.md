@@ -1,6 +1,8 @@
 # Ditcoin
 
-Copyright (c) 2017, The Ditcoin Project
+Copyright (c) 2017-2018, The Ditcoin Project
+Copyright (c) 2014-2017, The Monero Project
+Portions Copyright (c) 2012-2013, The Cryptonote developers
 
 ## Development Resources
 
@@ -52,6 +54,14 @@ The Monero donation address is: `42iXGr9Ms1FKxt1t8qLJdHRHVKvYMbgSxeRHNsNktjcpRyp
 ## License
 
 See [LICENSE](LICENSE).
+
+# Contributing
+
+If you want to help out, see [CONTRIBUTING](CONTRIBUTING.md) for a set of guidelines.
+
+## Vulnerability Response Process
+
+See [Vulnerability Response Process](VULNERABILITY_RESPONSE_PROCESS.md).
 
 ## Ditcoin software updates and consensus protocol changes (hard fork schedule)
 
@@ -153,7 +163,7 @@ invokes cmake commands as needed.
 
         HAVE_DOT=YES doxygen Doxyfile
 
-#### On the Raspberry Pi
+#### On the Raspberry Pi 2
 
 Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from https://www.raspberrypi.org/downloads/raspbian/
 
@@ -171,23 +181,23 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 * Install the latest version of boost (this may first require invoking `apt-get remove --purge libboost*` to remove a previous version if you're not using a clean install):
 ```
 	cd  
-	wget https://sourceforge.net/projects/boost/files/boost/1.62.0/boost_1_62_0.tar.bz2  
-	tar xvfo boost_1_62_0.tar.bz2  
-	cd boost_1_62_0  
+	wget https://sourceforge.net/projects/boost/files/boost/1.64.0/boost_1_64_0.tar.bz2  
+	tar xvfo boost_1_64_0.tar.bz2  
+	cd boost_1_64_0  
 	./bootstrap.sh  
 	sudo ./b2  
 ```
 * Wait ~8 hours
-
+```
 	sudo ./bjam install
-
+```
 * Wait ~4 hours
 
 * Change to the root of the source code directory and build:
 
         cd ditcoin-core
         make release
-
+```
 * Wait ~4 hours
 
 * The resulting executables can be found in `build/release/bin`
@@ -268,6 +278,15 @@ You will have to add the serialization, date_time, and regex modules to Boost wh
 
 To build: `env CC=egcc CXX=eg++ CPP=ecpp DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/path/to/the/boost/you/built make release-static-64`
 
+### On Linux for Android (using docker):
+
+        # Build image (select android64.Dockerfile for aarch64)
+        cd utils/build_scripts/ && docker build -f android32.Dockerfile -t ditcoin-android .
+        # Create container
+        docker create -it --name ditcoin-android ditcoin-android bash
+        # Get binaries
+        docker cp ditcoin-android:/opt/android/ditcoin/build/release/bin .
+
 ### Building Portable Statically Linked Binaries
 
 By default, in either dynamically or statically linked builds, binaries target the specific host processor on which the build happens and are not portable to other processors. Portable binaries can be built using the following targets:
@@ -310,7 +329,7 @@ ditcoin-wallet-cli, and possibly ditcoind, if you get crashes refreshing.
 
 ## Internationalization
 
-See README.i18n
+See [README.i18n.md](README.i18n.md).
 
 ## Using Tor
 
@@ -337,10 +356,6 @@ While ditcoind and ditcoin-wallet-cli do not use readline directly, most of the 
 `rlwrap bin/ditcoin-wallet-cli --wallet-file /path/to/wallet`
 
 Note: rlwrap will save things like your seed and private keys, if you supply them on prompt. You may want to not use rlwrap when you use simplewallet to restore from seed, etc.
-
-# Contributing
-
-If you want to help out, see CONTRIBUTING for a set of guidelines.
 
 # Debugging
 

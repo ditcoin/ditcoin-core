@@ -28,6 +28,7 @@
 
 // @TODO:#DITCOIN adaptation to currency own behavior
 
+#include "misc_log_ex.h"
 #include "util.h"
 #include "dns_utils.h"
 #include "updates.h"

@@ -8,15 +8,10 @@ Group=ditcoin
 WorkingDirectory=~
 
 Type=forking
-ExecStart=/usr/bin/ditcoind --config-file /etc/ditcoind.conf --detach
+PIDFile=/var/run/ditcoind.pid
 
-# This is necessary because ditcoind does not yet support
-# writing a PID file, which means systemd tries to guess the PID
-# by default, but it guesses wrong (sometimes, depending on
-# random timing of events), because the daemon forks twice.
-# The ultimate fix is for the daemon to write a PID file, and
-# a workaround is to disable the guessing feature in systemd.
-GuessMainPID=no
+ExecStart=/usr/bin/ditcoind --config-file /etc/ditcoind.conf \
+    --detach --pidfile /var/run/ditcoind.pid
 
 [Install]
 WantedBy=multi-user.target

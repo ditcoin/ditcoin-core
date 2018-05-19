@@ -31,9 +31,12 @@
 #include <atomic>
 #include "misc_log_ex.h"
 
-INITIALIZE_EASYLOGGINGPP
+#undef MONERO_DEFAULT_LOG_CATEGORY
+#define MONERO_DEFAULT_LOG_CATEGORY "logging"
 
 #define MLOG_BASE_FORMAT "%datetime{%Y-%M-%d %H:%m:%s.%g}\t%thread\t%level\t%logger\t%loc\t%msg"
+
+#define MLOG_LOG(x) CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,MONERO_DEFAULT_LOG_CATEGORY) << x
 
 using namespace epee;
 
@@ -88,10 +91,10 @@ static const char *get_default_categories(int level)
   switch (level)
   {
     case 0:
-      categories = "*:WARNING,net:FATAL,net.p2p:FATAL,net.cn:FATAL,global:INFO,verify:FATAL,stacktrace:INFO";
+      categories = "*:WARNING,net:FATAL,net.p2p:FATAL,net.cn:FATAL,global:INFO,verify:FATAL,stacktrace:INFO,logging:INFO,msgwriter:INFO";
       break;
     case 1:
-      categories = "*:WARNING,global:INFO,stacktrace:INFO";
+      categories = "*:WARNING,global:INFO,stacktrace:INFO,logging:INFO,msgwriter:INFO";
       break;
     case 2:
       categories = "*:DEBUG";
@@ -126,7 +129,7 @@ void mlog_configure(const std::string &filename_base, bool console)
   el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
   el::Loggers::addFlag(el::LoggingFlag::ColoredTerminalOutput);
   el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
-  el::Helpers::installPreRollOutCallback([&filename_base](const char *name, size_t){
+  el::Helpers::installPreRollOutCallback([filename_base](const char *name, size_t){
     std::string rname = generate_log_filename(filename_base.c_str());
     rename(name, rname.c_str());
   });
@@ -136,13 +139,13 @@ void mlog_configure(const std::string &filename_base, bool console)
   {
     monero_log = get_default_categories(0);
   }
-  mlog_set_categories(monero_log);
+  mlog_set_log(monero_log);
 }
 
 void mlog_set_categories(const char *categories)
 {
   el::Loggers::setCategories(categories);
-  MGINFO("New log categories: " << categories);
+  MLOG_LOG("New log categories: " << categories);
 }
 
 // maps epee style log level to new logging system
@@ -150,7 +153,7 @@ void mlog_set_log_level(int level)
 {
   const char *categories = get_default_categories(level);
   el::Loggers::setCategories(categories);
-  MGINFO("New log categories: " << categories);
+  MLOG_LOG("New log categories: " << categories);
 }
 
 void mlog_set_log(const char *log)
