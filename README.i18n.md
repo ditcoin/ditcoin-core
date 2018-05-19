@@ -1,9 +1,9 @@
-Monero daemon internationalization
+Ditcoin daemon internationalization
 ==================================
 
-The Monero command line tools can be translated in various languages.
+The Ditcoin command line tools can be translated in various languages.
 
-In order to use the same translation workflow as the [Monero Core GUI](https://github.com/ditcoin/ditcoin-gui), they use Qt Linguist translation files.  However, to avoid the dependencies on Qt this normally implies, they use a custom loader to read those files at runtime.
+In order to use the same translation workflow as the [Ditcoin Core GUI](https://github.com/ditcoin/ditcoin-gui), they use Qt Linguist translation files.  However, to avoid the dependencies on Qt this normally implies, they use a custom loader to read those files at runtime.
 
 ### Tools for translators
 
