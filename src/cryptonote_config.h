@@ -53,6 +53,8 @@
 #define MONEY_SUPPLY                                    ((uint64_t)900000000000000)
 #define MAX_MONEY_EMISSION                              ((uint64_t)2800000000000000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (12)
+#define BLOCK_HEIGHT_SUBSIDY_NEXT                       303140
+#define FINAL_SUBSIDY_PER_MINUTE_NEXT                   ((uint64_t)250000000) // 2.5 * pow(10, 8)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)1500000000) // 15 * pow(10, 8)
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
