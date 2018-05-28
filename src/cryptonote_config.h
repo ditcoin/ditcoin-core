@@ -53,9 +53,14 @@
 #define MONEY_SUPPLY                                    ((uint64_t)900000000000000)
 #define MAX_MONEY_EMISSION                              ((uint64_t)2800000000000000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (12)
-#define BLOCK_HEIGHT_SUBSIDY_NEXT                       303140
 #define FINAL_SUBSIDY_PER_MINUTE_NEXT                   ((uint64_t)250000000) // 2.5 * pow(10, 8)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)1500000000) // 15 * pow(10, 8)
+
+#define BLOCK_HEIGHT_SUBSIDY_NEXT                       303140
+#define BLOCK_HEIGHT_MAIN_HF_V2                         259200
+#define BLOCK_HEIGHT_TEST_HF_V2                         624634
+#define BLOCK_EPOCH_MAIN_HF_V2                          1524054764 // value is got when the hf have been applied on the associated starting block height
+#define BLOCK_EPOCH_TEST_HF_V2                          1539156569 // value is got when the hf have been applied on the associated starting block height
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
 #define CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V2    60000 //size of block (bytes) after which reward for block calculated using block size
