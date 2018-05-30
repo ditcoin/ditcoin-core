@@ -194,7 +194,7 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 * Wait ~4 hours
 
 * Change to the root of the source code directory and build:
-
+```
         cd ditcoin-core
         make release
 ```
