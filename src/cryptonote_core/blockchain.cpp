@@ -94,17 +94,17 @@ static const struct {
   // version 2 starts from block 259200, which is on or around the 10th of April, 2018. Fork time finalised on 2018-04-11. No fork voting occurs for the v2 fork.
   { 2, 259200, 0, 1520666969 },
 
-  // version 3 starts from block 432000, which is on or around the 10th of jully, 2018. Fork time finalised on 2018-07-11.
-  { 3, 432000, 0, 1531207769 },
+  // version 3 starts from block 345600, which is on or around the 10th of jully, 2018. Fork time finalised on 2018-07-11.
+  { 3, 345600, 0, 1531207769 },
   
-  // version 4 starts from block 604800, which is on or around the 10th of october, 2018. Fork time finalised on 2018-10-11.
-  { 4, 604800, 0, 1539156569 },
+  // version 4 starts from block 410400, which is on or around the 10th of october, 2018. Fork time finalised on 2018-10-11.
+  { 4, 410400, 0, 1539156569 },
   
-  // version 5 starts from block 777600, which is on or around the 10th of june, 2019. Fork time finalised on 2019-01-11.
-  { 5, 777600, 0, 1547105369 },
+  // version 5 starts from block 475200, which is on or around the 10th of january, 2019. Fork time finalised on 2019-01-11.
+  { 5, 475200, 0, 1547105369 },
 
-  // version 5 starts from block 777600, which is on or around the 10th of jully, 2019. Fork time finalised on 2019-06-30.
-  { 6, 820800, 0, 1562806869 }
+  // version 5 starts from block 540000, which is on or around the 10th of April, 2019. Fork time finalised on 2019-04-11.
+  { 6, 540000, 0, 1523322069 }
 };
 static const uint64_t mainnet_hard_fork_version_1_till = 259199;
 
